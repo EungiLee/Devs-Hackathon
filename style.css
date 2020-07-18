@@ -1,5 +1,19 @@
 body {
     font-family:Arial;
+    padding:50px;
+}
+
+#timer {
+    position:fixed;
+    right:50px;
+    top:50px;
+    font-size:60px;
+}
+#startbutton {
+    position:fixed;
+    bottom:50px;
+    right:50px;
+    font-size:40px;
 }
 
 .event {
@@ -9,6 +23,7 @@ body {
     width:300px;
     height:100px;
     margin-bottom:30px;
+    display:inline-block;
 }
 
 .minutes {
@@ -17,18 +32,40 @@ body {
     display:inline;
     height:60px;
     color:darkgreen;
-    width:50%;
-    margin-left:50%;
+    width:40%;
+    margin-left:40%;
 }
 
 .createdBy {
     display:inline;
     font-size:25px;
     height:60px;
-    width:50%;
+    width:40%;
 }
 .name {
     font-size:30px;
     font-weight:800;
     display:block;
+}
+.add {
+    width:40px;
+    height:40px;
+    display:inline;
+    margin-top:40px;
+    margin-left:20px;
+}
+
+.addbox {
+    position:fixed;
+    left:500px;
+    background-color:#EEE;
+    border:1px solid black;
+    padding:10px;
+}
+
+.eventdelete{
+    width:20%;
+    margin-left:80%;
+    height:60px;
+    display:inline;
 }

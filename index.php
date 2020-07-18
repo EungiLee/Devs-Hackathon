@@ -5,13 +5,21 @@ $link = mysqli_connect('warriors88.powwebmysql.com', 'llne', 'benmatech', 'devs_
 	} 
 
 if($_POST["name"] !== null) {
-    $sql = "INSERT INTO `topics` (name,minutes) VALUES ('" . $_POST["name"] . "','" . $_POST["minutes"] . "')";
+
+    $sql = "INSERT INTO `topics` (`name`,`minutes`,`createdBy`,`ordering`) VALUES ('" . $_POST["name"] . "','" . $_POST["minutes"] . "','Logan','" . $_POST["benjamin"] . "')";
     if (mysqli_query($link, $sql)) {
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($link);
     }
 }
 
+if($_POST["benorder"] !== null) {
+    $sql = "DELETE FROM `topics` WHERE `ordering` = '" . $_POST["benorder"] . "'";
+	if (mysqli_query($link, $sql)) {
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($link);
+	}
+}
 ?>
 
 <html>
@@ -20,33 +28,69 @@ if($_POST["name"] !== null) {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <div id="timer">00:00</div>
+    <button onclick="startTimer()" id="startbutton">Start</button>
     <div id="updater"></div>
-    
-    
-    <div id="createNewEvent">
-        <form id="eventSubmit" action="index.php" method="post">
-            <input type="text" name="name" placeholder="Subject Name" class="textField" id="title"><br>
-            <input type="text" name="minutes" placeholder="Duration" class="textField" id="title">
-            <input type="submit" class="button">
-        </form>
-    </div>
+    <button onclick="nextEvent()">next</button>
+    <button onclick="previousEvent()">previous</button>
     
     <script>
+        let currentEvent = 0;
+        function nextEvent() {
+        currentEvent += 1;
+       }
+        function previousEvent() {
+        currentEvent -= 1;
+       }
+       function startTimer() {
+           // Get today's date and time
+            let startTime = new Date().getTime();
+
+            let distance = 0;
+            let currentTime = 0;
+            let minutes = 0;
+            let seconds = 0;
+            
+            setInterval(function() {
+                currentTime = new Date().getTime();
+                distance = currentTime - startTime;
+                
+             minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+             document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+
+                countdown = document.getElementById("time" + currentEvent).innerHTML;
+                countdown -= 1;
+                document.getElementById("time" + currentEvent).innerHTML = countdown;
+            },1000);
+          
+       } 
+        
+        
+        
+        
+    function showBox(boxNo) {
+        $("#box" + boxNo).show();
+        document.getElementById("box" + boxNo).innerHTML = '<form id="eventSubmit" action="index.php" method="post"><input type="text" name="name" placeholder="Subject Name" class="textField" id="title"><br><br><input type="text" name="minutes" placeholder="Duration" class="textField" id="title"><br><br><input type="hidden" name="benjamin" value="' + ((boxNo*10)+15) + '"><input type="submit" value="Add" class="button"></form>';
+ 
+    }   
+        
     let updatedEvents = "";
         
     function updateItems() {
         $.post("fetch.php", function(data) {
             updatedEvents = "";
-            
+            counting = 0; 
             eventObjects = data.split("~~~");
             eventObjects.pop();
             for(let i = 0; i < eventObjects.length; i++) {
                 eventObjects[i] = JSON.parse(eventObjects[i]);
             }
-            console.log(eventObjects);
             
             for(let i = 0; i < eventObjects.length; i++) {
-                updatedEvents += "<div class='event'><div class='createdBy'>" + eventObjects[i]["createdBy"] + "</div><div  class='minutes'>" + eventObjects[i]["minutes"] + "</div><div class='name'>" + eventObjects[i]["name"] + "</div></div>";
+                updatedEvents += "<div class='event'><div class='createdBy'>" + eventObjects[i]["createdBy"] + "</div><div  class='minutes' id='time" + i + "'>" + eventObjects[i]["minutes"] + "</div><form action='index.php' class='eventdelete' method='post'><input name='benorder' type='hidden' value='" + eventObjects[i]["ordering"] + "'><input type='submit' value='X'></form><div class='name'>" + eventObjects[i]["name"] + "</div></div><img onclick='showBox(" + i + ")' src='addbutton.png' class='add'><div class='addbox' id='box" + i + "' style='top:" + (60+150*i) + "; display:none;'></div><br>";
+                counting++;
             }
             
             document.getElementById("updater").innerHTML = updatedEvents;
@@ -55,10 +99,6 @@ if($_POST["name"] !== null) {
     }
         
     updateItems();
-        
-    //setInterval(function() {    
-   //     updateItems();
-   // }, 3000); 
     
     </script>
 </body>

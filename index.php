@@ -28,6 +28,7 @@ if($_POST["benorder"] !== null) {
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <div id="boxbox" style="display:none"></div>
     <div id="timer">00:00</div>
     <button onclick="startTimer()" id="startbutton">Start</button>
     <div id="updater"></div>
@@ -76,6 +77,27 @@ if($_POST["benorder"] !== null) {
  
     }   
         
+    function killBox() {
+        $("#boxbox").hide();
+    }
+        
+    function expand(boxNo) {
+        $.post("fetch.php", function(data) {
+            updatedEvents = "";
+            counting = 0; 
+            eventObjects = data.split("~~~");
+            eventObjects.pop();
+            for(let i = 0; i < eventObjects.length; i++) {
+                eventObjects[i] = JSON.parse(eventObjects[i]);
+            }
+            let selectedName = eventObjects[boxNo]["name"];
+            let selectedTime = eventObjects[boxNo]["minutes"];
+            let selectedNotes = eventObjects[boxNo]["notes"];
+            $("#boxbox").show();
+            document.getElementById("boxbox").innerHTML = "<button onclick='killBox()'>X</button><h1>" + selectedName + "</h1><h2>" + selectedTime + "</h2><textarea>" + selectedNotes + "</textarea>";
+        });
+    }    
+        
     let updatedEvents = "";
         
     function updateItems() {
@@ -89,7 +111,7 @@ if($_POST["benorder"] !== null) {
             }
             
             for(let i = 0; i < eventObjects.length; i++) {
-                updatedEvents += "<div class='event'><div class='createdBy'>" + eventObjects[i]["createdBy"] + "</div><div  class='minutes' id='time" + i + "'>" + eventObjects[i]["minutes"] + "</div><form action='index.php' class='eventdelete' method='post'><input name='benorder' type='hidden' value='" + eventObjects[i]["ordering"] + "'><input type='submit' value='X'></form><div class='name'>" + eventObjects[i]["name"] + "</div></div><img onclick='showBox(" + i + ")' src='addbutton.png' class='add'><div class='addbox' id='box" + i + "' style='top:" + (60+150*i) + "; display:none;'></div><br>";
+                updatedEvents += "<a onclick='expand(" + i + ")'><div class='event'><div class='createdBy'>" + eventObjects[i]["createdBy"] + "</div><div  class='minutes' id='time" + i + "'>" + eventObjects[i]["minutes"] + "</div><form action='index.php' class='eventdelete' method='post'><input name='benorder' type='hidden' value='" + eventObjects[i]["ordering"] + "'><input type='submit' value='X'></form><div class='name'>" + eventObjects[i]["name"] + "</a></div></div><img onclick='showBox(" + i + ")' src='addbutton.png' class='add'><div class='addbox' id='box" + i + "' style='top:" + (60+150*i) + "; display:none;'></div></a><br>";
                 counting++;
             }
             

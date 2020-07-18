@@ -1,26 +1,10 @@
-<?php
-$link = mysqli_connect('warriors88.powwebmysql.com', 'llne', 'benmatech', 'devs_hackathon'); 
-	if (!$link) { 
-    	die('Could not connect: ' . mysql_connect_error()); 
-	} 
-
-if($_POST["name"] !== null) {
-    $sql = "INSERT INTO `topics` (name,minutes) VALUES ('" . $_POST["name"] . "','" . $_POST["minutes"] . "')";
-    if (mysqli_query($link, $sql)) {
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($link);
-    }
-}
-
-?>
-
 <html>
-<head>
+    <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div id="updater"></div>
+    <div id="updater"><div class="event"><div class="createdBy">Logan</div><div class="minutes">2</div><div class="name">Opening</div></div><div class="event"><div class="createdBy">Lance</div><div class="minutes">2</div><div class="name">Objective Overview</div></div></div>
     
     
     <div id="createNewEvent">
@@ -61,6 +45,6 @@ if($_POST["name"] !== null) {
    // }, 3000); 
     
     </script>
-</body>
 
-</html>
+
+</body></html>

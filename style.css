@@ -7,15 +7,28 @@ body {
     border:1px solid black;
     padding:10px;
     width:300px;
+    height:100px;
     margin-bottom:30px;
 }
 
 .minutes {
     padding-right:10px;
-    font-size:20px;
+    font-size:25px;
+    display:inline;
+    height:60px;
+    color:darkgreen;
+    width:50%;
+    margin-left:50%;
 }
 
+.createdBy {
+    display:inline;
+    font-size:25px;
+    height:60px;
+    width:50%;
+}
 .name {
-    font-size:20px;
+    font-size:30px;
     font-weight:800;
+    display:block;
 }

@@ -1,37 +1,38 @@
-## Welcome to GitHub Pages
+# Developers Society Hackathon - BenM - Meeting Planner Web-Application
 
-You can use the [editor on GitHub](https://github.com/lancelancezhang/DevsHackathon/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Created by the team Benjamin Ma Technologies consisting of Natasha Ong, Eungi Lee, Logan Mellow, Lance Zhang
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## What is it?
 
-### Markdown
+The BenM web-app addresses the lack of structure often found in Video Conferencing Calls that occurred during lockdown. BenM is intended to be used alongside video conferencing applications. Users collaboratively work on a meeting plan to organise which topics will be talked about, for how long and by who. It follows a flow chart style and users active participate in how they want the meeting to flow before and during the meeting.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![Starting Image](https://github.com/lancelancezhang/DevsHackathon/blob/master/a1.JPG)
 
-```markdown
-Syntax highlighted code block
+### Key Features
+* Global timer
+* Topic path digression
+* Records meeting minutes - timestamps for meeting recordings
+* Collaborative commenting on topics
+* Raise Hand
 
-# Header 1
-## Header 2
-### Header 3
+![Topic Adding](https://github.com/lancelancezhang/DevsHackathon/blob/master/a2.JPG)
 
-- Bulleted
-- List
+Where users can add their own comments
 
-1. Numbered
-2. List
+![Comment Adding](https://github.com/lancelancezhang/DevsHackathon/blob/master/a3.JPG)
 
-**Bold** and _Italic_ and `Code` text
+When the meeting has finished
 
-[Link](url) and ![Image](src)
-```
+![Comment Adding](https://github.com/lancelancezhang/DevsHackathon/blob/master/a4.JPG)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Pitch Deck
 
-### Jekyll Themes
+See our pitch deck [here!](https://docs.google.com/presentation/d/1G_CS1T6v3BYclJWpeBaOvUj816g-ge3F9bQnc53gwC0/edit?usp=sharing)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lancelancezhang/DevsHackathon/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+The Pitch covers:
+* Problem analysis
+* Market Analysis
+* Market Validation
+* Analysis of Competitors
+* Implementation and Deployment
+* Future Growth and Expandability
